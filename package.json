@@ -12,7 +12,8 @@
     "test": "mocha --ui tdd",
     "lint": "eslint $(find lib -type f -name '*.js')  --quiet",
     "pretty": "prettier -c --write $(find lib -type f -name '*.js')",
-    "build": "rollup -c"
+    "build": "rollup -c",
+    "postversion": "git push --tags"
   },
   "husky": {
     "hooks": {
