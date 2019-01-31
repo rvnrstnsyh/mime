@@ -704,9 +704,7 @@ var debug$3 = debug('mimemessage:factory');
 var debugerror$2 = debug('mimemessage:ERROR:factory');
 debugerror$2.log = console.warn.bind(console);
 
-function factory() {
-  var data = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  debug$3('factory() | [data:%o]', data);
+function buildEntity(data) {
   var entity = new Entity_1(); // Add Content-Type.
 
   if (data.contentType) {
@@ -729,6 +727,46 @@ function factory() {
   }
 
   return entity;
+}
+
+var formatKey = function formatKey(key) {
+  if (key === 'contentTransfer') {
+    return 'contentTransferEncoding';
+  }
+
+  return key;
+};
+
+function factory() {
+  var data = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  debug$3('factory() | [data:%o]', data);
+  var stringifyKey = ['contentType', 'contentDisposition', 'contentTransferEncoding'];
+  /*
+      Some keys can be an array, as headers are strings we parse them
+      then we keep only the longest string.
+      ex:
+          "contentType": [
+            "image/png; name=\"logo.png\"",
+            "image/png"
+          ],
+      Output:
+          "contentType": "image/png; name=\"logo.png\""
+       Some key are also non-standard ex: contentTransfer instead of contentTransferEncoding, we format the key too.
+   */
+
+  var config = Object.keys(data).reduce(function (acc, item) {
+    var key = formatKey(item);
+
+    if (stringifyKey.includes(key) && Array.isArray(data[item])) {
+      acc[key] = data[item][0]; // BE convention is to do the first one
+
+      return acc;
+    }
+
+    acc[key] = data[key];
+    return acc;
+  }, Object.create(null));
+  return buildEntity(config);
 }
 
 var mimemessage = {
