@@ -1,5 +1,5 @@
+const { describe, it } = require('mocha');
 const expect = require('expect.js');
-const mimemessage = require('../');
 const factory = require('../lib/factory');
 const parse = require('../lib/parse');
 const tools = require('./tools');

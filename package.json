@@ -7,7 +7,7 @@
   "keywords": [
     "mime"
   ],
-  "main": "dist/mimemessage.js",
+  "main": "dist/index.js",
   "scripts": {
     "test": "mocha --ui tdd",
     "lint": "eslint $(find lib -type f -name '*.js')  --quiet",
@@ -34,6 +34,9 @@
   "bugs": {
     "url": "https://github.com/ProtonMail/mimemessage.js/issues"
   },
+  "contributors": [
+    "Rivane Rasetiansyah <re@nvll.me> (https://nvll.me)"
+  ],
   "dependencies": {
     "debug": "^2.2.0",
     "rfc2047": "^2.0.1"
@@ -77,6 +80,6 @@
     "rollup-plugin-commonjs": "^9.2.0"
   },
   "engines": {
-    "node": ">=0.10.32"
+    "node": ">=20.17.0"
   }
 }

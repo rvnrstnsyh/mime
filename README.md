@@ -1,8 +1,8 @@
-# mimemessage.js
+# MIME
 
-MIME messages for JavaScript (RFC [2045](https://tools.ietf.org/html/rfc2045) & [2046](https://tools.ietf.org/html/rfc2046)).
+MIME messages for JavaScript (RFC [2045](https://tools.ietf.org/html/rfc2045) & [2046](https://tools.ietf.org/html/rfc2046)). Forked from [ProtonMail/mimemessage.js](https://github.com/ProtonMail/mimemessage.js), NVLL uses the `main` branch to compose MIME messages, while the original code is preserved in the `master` branch.
 
-Suitable for parsing and generating MIME messages, allowing access to headers and body, including multipart messages such as:
+Both are suitable for parsing and generating MIME messages, allowing access to headers and body, including multipart messages such as:
 
 ```
 From: Nathaniel Borenstein <nsb@bellcore.com>

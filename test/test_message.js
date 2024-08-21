@@ -1,6 +1,7 @@
 /**
  * Dependencies.
  */
+const { describe, it } = require('mocha');
 const expect = require('expect.js');
 const mimemessage = require('../');
 const factory = require('../lib/factory');
@@ -12,7 +13,7 @@ const factory = require('../lib/factory');
 
 describe('Message', () => {
 
-    let msg = factory({
+    const msg = factory({
         contentType: 'Text/Plain',
         contentTransferEncoding: 'BASE64',
         body: 'HELLO œæ€!'
@@ -78,8 +79,8 @@ describe('Message', () => {
             contentType
         });
 
-        expect(/[^\u0000-\u00ff]/.test(msg.toString())).to.be(false);
-        expect(/[^\u0000-\u00ff]/.test(msg.toString({ unicode: true }))).to.be(true);
+        expect(/[^\u{0000}-\u{00FF}]/u.test(msg.toString())).to.be(false);
+        expect(/[^\u{0000}-\u{00FF}]/u.test(msg.toString({ unicode: true }))).to.be(true);
     });
 
     it('must encode content', () => {
